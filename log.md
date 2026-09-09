@@ -155,3 +155,11 @@ GitHub組織・リポジトリのセットアップで以下の混乱が発生�
 - `index.html`の#overviewを、3つの`.card`＋`.card-grid`から、単一の`.card`内に`.fact-list`（3行）を配置する形に変更。テキストは指定通り「日時　2026年11月28日（土）10:00～12:00 / 受付開始時間の詳細は...」の形式。
 - CSSの`.card-grid`・`.card-label`・`.card-value`は他で使われなくなったため削除。`.card`に`margin-top:24px`を追加し、`.card .fact-list`は`margin-top:0`にして二重の余白を防いだ。レスポンシブの`.card-grid`用ルールも削除。
 - ヘッドレスChromeで再描画確認し、意図通りの単一カード・ラベル形式になっていることを確認した。
+
+## 2026-09-09（簡易パスワードゲートの実装・検索避け）
+
+- ユーザーからBasic認証（.htaccess/.htpasswd、ID:youkoso）の依頼。GitHub Pagesは静的ホスティングで`.htaccess`が機能しない旨を説明し、代替案（①JSの簡易パスワードゲート／②Cloudflareで本物のBasic認証）を提示。ユーザーは①を選択。
+- `index.html`に`#auth-gate`（ID・PW入力フォーム）と`#site-content`（本来のページ内容、初期`hidden`）を追加。`js/auth.js`で入力値（ID:PW形式で結合）をSHA-256ハッシュ化し、正解ハッシュと一致すれば`sessionStorage`にフラグを立てて内容を表示する方式にした。正解ハッシュのみをJSに埋め込み、平文のID/PWはリポジトリ内のどのファイルにも残していない（公開リポジトリのため）。
+- 続けてユーザーから「検索エンジンに引っかからないようにnoindexを入れてほしい」との依頼があり、`<meta name="robots" content="noindex, nofollow">`をheadに追加し、`robots.txt`で全パスDisallowも設定した。
+- **不具合と修正**: 実装直後、ヘッドレスChromeでの動作確認中に、ログイン後のページ高さが際限なく増え続ける重大な不具合を発見。調査の結果、`.auth-gate`にCSSで`display:flex`を指定していたため、JSが`hidden`属性を付けても実際には非表示にならず（author CSSがブラウザ標準の`[hidden]{display:none}`より優先されてしまう仕様上の問題）、ログイン画面とサイト本編が同時にレイアウトされ続けたことが原因と判明。`.auth-gate[hidden] { display: none; }`を追加して修正し、再度CDP経由の自動テストで高さが安定すること（約5080px、正常値）を確認した。
+- 正しいID/PWでの認証成功、誤ったID/PWでのエラー表示、両方をCDP経由のスクリプトで動作確認済み。

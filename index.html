@@ -5,9 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ようこそ守谷へ2026｜転入者交流イベント</title>
 <meta name="description" content="守谷市に転入された方を歓迎する交流イベント「ようこそ守谷へ2026」のご案内。日時・会場・参加費・お申込み方法をご案内します。">
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <div id="auth-gate" class="auth-gate">
+    <form id="auth-form" class="auth-card">
+      <h1 class="auth-title">ようこそ守谷へ2026</h1>
+      <p class="auth-lead">閲覧にはIDとパスワードが必要です。</p>
+      <label class="auth-label" for="auth-id">ID</label>
+      <input type="text" id="auth-id" class="auth-input" autocomplete="username" required>
+      <label class="auth-label" for="auth-pw">パスワード</label>
+      <input type="password" id="auth-pw" class="auth-input" autocomplete="current-password" required>
+      <button type="submit" class="btn btn-primary auth-submit">入室する</button>
+      <p id="auth-error" class="auth-error" hidden>IDまたはパスワードが違います。</p>
+    </form>
+  </div>
+
+  <div id="site-content" hidden>
 
   <header class="hero">
     <div class="container">
@@ -167,5 +183,8 @@
     </div>
   </footer>
 
+  </div>
+
+  <script src="js/auth.js"></script>
 </body>
 </html>
