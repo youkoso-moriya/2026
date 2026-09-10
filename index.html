@@ -105,8 +105,7 @@
         <h2 class="section-title">お申込み方法</h2>
         <p>お申込みはGoogleフォームから受け付けています。下記ボタンよりお進みください。</p>
         <p class="deadline">お申込み締切：<strong>2026年10月12日</strong></p>
-        <!-- TODO: Googleフォームのリンク確定後、下記hrefを差し替えてください -->
-        <a href="#" class="btn btn-primary">Googleフォームで申し込む</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScnkDb8QxBsYxUyYBxZxg5iVjAeEFXgkIIBRcbaPvawx7mlmw/viewform" class="btn btn-primary" target="_blank" rel="noopener">Googleフォームで申し込む</a>
         <p class="section-note">フォームが分からない場合は、下記の問合せ先までご連絡ください。</p>
       </div>
     </section>
@@ -115,35 +114,51 @@
       <img src="assets/img/kojumaru/kojumaru002.png" alt="" class="deco-kojumaru deco--top-right" aria-hidden="true">
       <div class="container">
         <h2 class="section-title">昨年の様子</h2>
-        <!-- TODO: 2025年開催時の写真・キャプションに差し替えてください（枠のみ） -->
         <div class="gallery-grid">
           <figure class="gallery-item">
-            <div class="gallery-photo">写真</div>
-            <figcaption class="gallery-caption">キャプション準備中</figcaption>
+            <button type="button" class="gallery-photo-btn" data-full="assets/img/photo-01.png" aria-label="拡大表示：自己紹介の様子">
+              <img src="assets/img/photo-01.png" alt="自己紹介の様子" class="gallery-photo" loading="lazy">
+            </button>
+            <figcaption class="gallery-caption">自己紹介の様子</figcaption>
           </figure>
           <figure class="gallery-item">
-            <div class="gallery-photo">写真</div>
-            <figcaption class="gallery-caption">キャプション準備中</figcaption>
+            <button type="button" class="gallery-photo-btn" data-full="assets/img/photo-02.png" aria-label="拡大表示：クイズで大盛り上がり">
+              <img src="assets/img/photo-02.png" alt="クイズで大盛り上がり" class="gallery-photo" loading="lazy">
+            </button>
+            <figcaption class="gallery-caption">クイズで大盛り上がり</figcaption>
           </figure>
           <figure class="gallery-item">
-            <div class="gallery-photo">写真</div>
-            <figcaption class="gallery-caption">キャプション準備中</figcaption>
+            <button type="button" class="gallery-photo-btn" data-full="assets/img/photo-03.png" aria-label="拡大表示：こじゅまるとの交流">
+              <img src="assets/img/photo-03.png" alt="こじゅまるとの交流" class="gallery-photo" loading="lazy">
+            </button>
+            <figcaption class="gallery-caption">こじゅまるとの交流</figcaption>
           </figure>
           <figure class="gallery-item">
-            <div class="gallery-photo">写真</div>
-            <figcaption class="gallery-caption">キャプション準備中</figcaption>
+            <button type="button" class="gallery-photo-btn" data-full="assets/img/photo-04.png" aria-label="拡大表示：自由時間を楽しむ様子">
+              <img src="assets/img/photo-04.png" alt="自由時間を楽しむ様子" class="gallery-photo" loading="lazy">
+            </button>
+            <figcaption class="gallery-caption">自由時間を楽しむ様子</figcaption>
           </figure>
           <figure class="gallery-item">
-            <div class="gallery-photo">写真</div>
-            <figcaption class="gallery-caption">キャプション準備中</figcaption>
+            <button type="button" class="gallery-photo-btn" data-full="assets/img/photo-05.png" aria-label="拡大表示：野鳥の会">
+              <img src="assets/img/photo-05.png" alt="野鳥の会" class="gallery-photo" loading="lazy">
+            </button>
+            <figcaption class="gallery-caption">野鳥の会</figcaption>
           </figure>
           <figure class="gallery-item">
-            <div class="gallery-photo">写真</div>
-            <figcaption class="gallery-caption">キャプション準備中</figcaption>
+            <button type="button" class="gallery-photo-btn" data-full="assets/img/photo-06.png" aria-label="拡大表示：グループ対抗玉入れの様子">
+              <img src="assets/img/photo-06.png" alt="グループ対抗玉入れの様子" class="gallery-photo" loading="lazy">
+            </button>
+            <figcaption class="gallery-caption">グループ対抗玉入れの様子</figcaption>
           </figure>
         </div>
       </div>
     </section>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="閉じる">&times;</button>
+      <img src="" alt="" class="lightbox-img" id="lightbox-img">
+    </div>
 
     <section class="section" id="access">
       <img src="assets/img/kojumaru/kojumaru004.png" alt="" class="deco-kojumaru deco--bottom-left" aria-hidden="true">
@@ -186,5 +201,6 @@
   </div>
 
   <script src="js/auth.js"></script>
+  <script src="js/gallery.js"></script>
 </body>
 </html>

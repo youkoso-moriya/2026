@@ -163,3 +163,13 @@ GitHub組織・リポジトリのセットアップで以下の混乱が発生�
 - 続けてユーザーから「検索エンジンに引っかからないようにnoindexを入れてほしい」との依頼があり、`<meta name="robots" content="noindex, nofollow">`をheadに追加し、`robots.txt`で全パスDisallowも設定した。
 - **不具合と修正**: 実装直後、ヘッドレスChromeでの動作確認中に、ログイン後のページ高さが際限なく増え続ける重大な不具合を発見。調査の結果、`.auth-gate`にCSSで`display:flex`を指定していたため、JSが`hidden`属性を付けても実際には非表示にならず（author CSSがブラウザ標準の`[hidden]{display:none}`より優先されてしまう仕様上の問題）、ログイン画面とサイト本編が同時にレイアウトされ続けたことが原因と判明。`.auth-gate[hidden] { display: none; }`を追加して修正し、再度CDP経由の自動テストで高さが安定すること（約5080px、正常値）を確認した。
 - 正しいID/PWでの認証成功、誤ったID/PWでのエラー表示、両方をCDP経由のスクリプトで動作確認済み。
+
+## 2026-09-10（Googleフォームの申込URLを設定）
+
+- ユーザーからGoogleフォームのURL（`https://docs.google.com/forms/d/e/1FAIpQLScnkDb8QxBsYxUyYBxZxg5iVjAeEFXgkIIBRcbaPvawx7mlmw/viewform`）の連絡を受け、`index.html`の申込ボタン（`#apply`）の`href="#"`プレースホルダーを差し替え。あわせて外部リンクとして`target="_blank" rel="noopener"`を付与し、TODOコメントを削除。
+
+## 2026-09-10（「昨年の様子」ギャラリーに実写真を掲載・クリック拡大機能を追加）
+
+- ユーザーが`assets/img/`に`photo-01.png`〜`photo-06.png`（2025年開催時の写真）を配置。指定された順序・キャプション（自己紹介の様子／クイズで大盛り上がり／こじゅまるとの交流／自由時間を楽しむ様子／野鳥の会／グループ対抗玉入れの様子）で`#gallery`セクションのプレースホルダー（「写真」枠＋「キャプション準備中」）を実写真・実キャプションに差し替えた。
+- 各写真を`<button class="gallery-photo-btn">`でラップし、クリック（タップ）すると`js/gallery.js`が画面全体を覆う`#lightbox`オーバーレイに拡大画像を表示する仕組みを新規実装（閉じるボタン／オーバーレイ背景クリック／Escキーのいずれでも閉じられる）。CSSは`css/style.css`にライトボックス用スタイルを追加し、`.gallery-photo`は枠線プレースホルダーから実画像表示用（`object-fit: cover`）のスタイルに変更した。
+- ヘッドレスChrome（CDP経由）でパスワードゲートを迂回した状態でギャラリー表示・1枚目クリックでのライトボックス表示（画像src・altが正しいこと）・閉じるボタンでの非表示化を確認済み。`design.md`のページ構成にも「昨年の様子」セクションの実装内容を追記。
