@@ -81,7 +81,7 @@
   | このイベントについて (#about) | 右上 | `kojumaru002.png` |
   | 開催概要 (#overview) | 左下 | `kojumaru004.png` |
   | 当日の流れ (#timeline) | 右上 | `kojumaru017.png` |
-  | もりや情報ブース (#booths) | 左下 | `kojumaru_31.png` |
+  | もりや情報ブース (#booths) | 右上 | `kojumaru_31.png` |
   | 昨年の様子 (#gallery) | 右上 | `kojumaru002.png`（再利用） |
   | アクセス (#access) | 左下 | `kojumaru004.png`（再利用） |
 
