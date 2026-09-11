@@ -173,3 +173,20 @@ GitHub組織・リポジトリのセットアップで以下の混乱が発生�
 - ユーザーが`assets/img/`に`photo-01.png`〜`photo-06.png`（2025年開催時の写真）を配置。指定された順序・キャプション（自己紹介の様子／クイズで大盛り上がり／こじゅまるとの交流／自由時間を楽しむ様子／野鳥の会／グループ対抗玉入れの様子）で`#gallery`セクションのプレースホルダー（「写真」枠＋「キャプション準備中」）を実写真・実キャプションに差し替えた。
 - 各写真を`<button class="gallery-photo-btn">`でラップし、クリック（タップ）すると`js/gallery.js`が画面全体を覆う`#lightbox`オーバーレイに拡大画像を表示する仕組みを新規実装（閉じるボタン／オーバーレイ背景クリック／Escキーのいずれでも閉じられる）。CSSは`css/style.css`にライトボックス用スタイルを追加し、`.gallery-photo`は枠線プレースホルダーから実画像表示用（`object-fit: cover`）のスタイルに変更した。
 - ヘッドレスChrome（CDP経由）でパスワードゲートを迂回した状態でギャラリー表示・1枚目クリックでのライトボックス表示（画像src・altが正しいこと）・閉じるボタンでの非表示化を確認済み。`design.md`のページ構成にも「昨年の様子」セクションの実装内容を追記。
+
+## 2026-09-10（アセットのディレクトリ構成を`assets/`配下に統一）
+
+- ユーザー指示により、ルート直下にあった`css/`・`js/`フォルダを`assets/css/`・`assets/js/`へ移動（`git mv`）。`assets/img/`と合わせて、画像・CSS・JSがすべて`assets/`配下に種類別で整理される構成になった。
+- `index.html`内の参照（`<link>`のhref、`<script>`のsrc）を新パスに更新。`design.md`・`CLAUDE.md`内の現在のファイルパス表記も新構成に合わせて更新（過去の作業記録であるlog.mdの各エントリ内のパス表記は当時の記録のため変更していない）。
+- ヘッドレスChromeでCSSの読み込み（body背景色の適用）とギャラリー・ライトボックス（`assets/js/gallery.js`）の動作を再確認し、パス変更後も問題なく機能することを確認した。
+
+## 2026-09-11（ディレクトリ再編に伴うヒーロー背景画像の表示崩れを修正）
+
+- ユーザーから「hero部分の背景画像が表示されない」と報告。調査の結果、前日（2026-09-10）の`css/`→`assets/css/`移動時に、`.hero`の`background-image: url("../assets/img/hero.jpg")`（`css/style.css`が最上位にあった頃の相対パス）を更新し忘れていたことが原因と判明。移動後のファイル位置は`assets/css/style.css`のため、`../assets/img/hero.jpg`は実際には`assets/assets/img/hero.jpg`（存在しないパス）を指してしまっていた。
+- `assets/css/style.css`の該当行を`url("../img/hero.jpg")`に修正（`assets/css/`から見て`../img/hero.jpg` = `assets/img/hero.jpg`で正しく解決される）。
+- ヘッドレスChromeで`.hero`の`background-image`の解決後URLが`assets/img/hero.jpg`になっていること、実際に背景写真が表示されることをスクリーンショットで確認済み。
+
+## 2026-09-11（フローティング申込ボタンを追加）
+
+- ユーザーから「申し込みがすぐにわかるように、追従する申込ボタンを右下に配置してほしい」との依頼。フッター直後に`<a class="fab-apply">`（Googleフォームへの直リンク、`target="_blank" rel="noopener"`）を追加し、`position: fixed; right/bottom: 16px;`で画面右下に常時表示させた（`#site-content`内に配置しているため、パスワードゲート通過前は表示されない）。iOSのホームインジケーター領域に被らないよう`padding-bottom`に`env(safe-area-inset-bottom)`を加算。
+- ヘッドレスChrome（モバイル幅390px相当、CDP経由）でページ最上部・中間・最下部それぞれのスクロール位置でスクリーンショットを取得し、ボタンが常に右下に固定表示され続けることを確認済み。`design.md`の「UIパーツの方針」に実装内容を追記。

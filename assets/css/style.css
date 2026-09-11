@@ -110,7 +110,7 @@ body {
 /* ---------- Hero ---------- */
 
 .hero {
-  background-image: url("../assets/img/hero.jpg");
+  background-image: url("../img/hero.jpg");
   background-size: cover;
   background-position: center;
   color: var(--color-primary-dark);
@@ -411,6 +411,23 @@ body {
 
 #apply .btn {
   margin-bottom: 8px;
+}
+
+.fab-apply {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  display: inline-block;
+  padding: 14px 22px;
+  padding-bottom: calc(14px + env(safe-area-inset-bottom));
+  border-radius: 999px;
+  background-color: var(--color-primary-dark);
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* ---------- Kojumaru background decoration ---------- */
