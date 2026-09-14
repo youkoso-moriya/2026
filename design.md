@@ -104,6 +104,15 @@ GitHub Pagesは静的ホスティングのため`.htaccess`/`.htpasswd`による
   - ID/PWは実行委員会から指示された値をハッシュ化して`assets/js/auth.js`に埋め込み済み。
 - **検索エンジン対策**: `<meta name="robots" content="noindex, nofollow">` をheadに追加し、`robots.txt`で全パスを`Disallow`。これによりGoogle等の検索結果には表示されなくなる（ただし直接URLを知っていればアクセス自体は可能）。
 
+## アクセス解析（GA4）とコンバージョン計測（2026-09-14）
+
+PV（ページビュー）と申込導線のクリックを計測するため、GA4（Google Analytics 4）を直接埋め込み方式（gtag.js）で導入する。GTM（Google Tag Manager）は、このサイトが1ページ・少数タグの静的サイトであるため採用せず、シンプルさを優先した。
+
+- **PV計測**: `index.html`の`<head>`にgtag.jsスニペットを設置（`<meta name="robots">`の直後）。GA4の自動計測（Enhanced measurement）により`page_view`イベントが自動送信される。パスワードゲート（`#auth-gate`）表示中でも`<head>`のスクリプトは実行されるため、PVはID/PW入力の成否に関わらずページ読み込み時点でカウントされる。
+- **測定ID**: `G-L8WZNQQLK7`（2026-09-14に確定・設定済み）。GA4プロパティ作成・測定ID取得の手順は`log.md`の2026-09-14の記録を参照。
+- **コンバージョン計測（間接指標）**: 申込はGoogleフォーム（別タブで開く外部サイト）で完結するため、このサイト側から「フォーム送信完了」は直接検知できない（クロスオリジンのため）。代わりに、申込導線となる3つのリンク（ヒーローの`.hero-cta`、お申込み方法セクションの`.btn-primary`、フローティングボタンの`.fab-apply`）すべてに共通クラス`js-apply-cta`と、設置箇所を区別する`data-cta-position`属性（`hero` / `apply_section` / `floating_button`）を付与。`assets/js/analytics.js`がこれらのクリック時にGA4カスタムイベント`apply_click`（パラメータ`cta_position`）を送信する。
+  - **注意**: これは「Googleフォームへの遷移」を計測する近似値であり、フォームの実際の送信完了を意味しない。GA4管理画面側で`apply_click`イベントを「コンバージョンとしてマーク」する設定（ユーザー側の作業、コード側では完結しない）を行うことで、GA4のコンバージョンレポートに反映される。
+
 ## アクセシビリティ
 
 - 本文文字サイズ16px以上
