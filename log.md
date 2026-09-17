@@ -239,3 +239,11 @@ GitHub組織・リポジトリのセットアップで以下の混乱が発生�
 - ユーザーがGA4アカウント・プロパティ・データストリームを作成し、測定ID`G-L8WZNQQLK7`を取得。`index.html`内の2箇所のプレースホルダー（`G-XXXXXXXXXX`）をこの測定IDに差し替えた。
 - ヘッドレスChrome（CDP経由、Networkドメインでリクエスト監視）で実際にページを読み込み、`https://www.google-analytics.com/g/collect?...tid=G-L8WZNQQLK7...en=page_view...`のリクエストが実際に送信されることを確認済み（GA4への送信自体が正しく機能していることを実証）。
 - 残タスク: サイト公開後、実際に申込ボタンがクリックされて`apply_click`イベントがGA4管理画面の「イベント」一覧に表示されたら、そのイベントを「コンバージョンとしてマークする」設定をユーザー側で行う（CLAUDE.mdのオープン事項からは今回の測定ID設定分をクローズ済み）。
+
+## 2026-09-18（パスワードゲートを廃止）
+
+- ユーザーから「パスワードを外してください」との依頼。2026-09-09に実装した簡易パスワードゲート（`#auth-gate`・`#site-content`・`assets/js/auth.js`）を撤去し、ページにアクセスすれば即座に内容が表示されるようにした。
+- `index.html`から`#auth-gate`のフォーム一式と、`#site-content`のラッパーdiv（開始・終了タグ）、`<script src="assets/js/auth.js">`を削除。`assets/css/style.css`から`.auth-gate`関連のスタイル一式（`.auth-gate`〜`.auth-error`）を削除。`assets/js/auth.js`ファイル自体も`git rm`で削除。
+- `<meta name="robots" content="noindex, nofollow">`と`robots.txt`による検索エンジンのインデックス拒否はそのまま維持（パスワードとは別の仕組みのため、削除依頼の対象外と判断）。
+- ヘッドレスChromeで、ページ読み込み時に`#auth-gate`・`#site-content`要素自体が存在しないこと、ヒーローセクションが即座に表示されることをスクリーンショットで確認済み。
+- `design.md`の「アクセス制限・検索避け」を「検索避け」に見出しを変更し廃止内容を追記、`CLAUDE.md`のオープン事項も更新した。
