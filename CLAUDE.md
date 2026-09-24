@@ -77,7 +77,7 @@ design.mdやlog.mdを作成・更新する際は、既存の内容を読んで�
 - ~~Googleフォームの実際のURL~~ → **確定済み（2026-09-10）**: `https://docs.google.com/forms/d/e/1FAIpQLScnkDb8QxBsYxUyYBxZxg5iVjAeEFXgkIIBRcbaPvawx7mlmw/viewform` を`index.html`の申込ボタンに設定済み。
 - ~~昨年の様子（写真）セクションの追加予定~~ → **実装済み（2026-09-10）**: ユーザー指定の`assets/img/photo-01.png`〜`photo-06.png`（6枚）を指定順・指定キャプションで`#gallery`セクションに掲載。クリックで拡大表示するライトボックス機能も`assets/js/gallery.js`で実装済み。
 - **GitHub Pagesの有効化がまだ**（`https://github.com/youkoso-moriya/2026/settings/pages` でbranch: `main` / `/ (root)` を設定する）。
-- ~~GA4の測定IDが未設定~~ → **設定済み（2026-09-14）**: 測定ID`G-L8WZNQQLK7`を`index.html`に反映済み。PV・申込クリック（`apply_click`イベント）の計測を実装・動作確認済み。残る作業は、GA4管理画面で`apply_click`イベントを「コンバージョンとしてマークする」設定のみ（詳細は`log.md`の2026-09-14の記録、実装詳細は`design.md`の「アクセス解析（GA4）とコンバージョン計測」参照）。
+- ~~GA4の測定IDが未設定~~ → **設定済み・コンバージョン登録まで完了（2026-09-14, 2026-09-18）**: 測定ID`G-L8WZNQQLK7`を`index.html`に反映し、PV・申込クリック（`apply_click`イベント）の計測を実装・動作確認済み。GA4管理画面で`apply_click`をキーイベント（コンバージョン）として登録済み。（任意）`cta_position`パラメータをカスタムディメンション登録すればボタン別の内訳分析も可能（未実施、詳細は`log.md`の2026-09-18の記録参照）。実装詳細は`design.md`の「アクセス解析（GA4）とコンバージョン計測」参照。
 - ~~アクセス制限（簡易パスワードゲート）を実装済み~~ → **2026-09-18にユーザー指示で廃止**: `#auth-gate`・`assets/js/auth.js`によるクライアントサイドのSHA-256パスワードチェックは削除済み。現在はページにアクセスすれば即座に内容が表示される。`<meta name="robots">`と`robots.txt`による検索エンジンのインデックス拒否は引き続き有効（詳細は`design.md`の「検索避け」参照）。
 - **不要になったリポジトリの削除（任意）**: セットアップ時の混乱で、意図せず作成した個人アカウント `miyamoto-youkoso-moriya` 配下に `html` と `2026` という使わないリポジトリが残っている。削除して問題ない（詳細は `log.md` の2026-09-05参照）。
 - **こじゅまるイラストの使用可否**: 確認済み・使用する方針。守谷市公式サイトの[イラスト利用のルール](https://www.city.moriya.ibaraki.jp/citypromotion/kittomotto/1010918/1010926/index.html)により、ボランティア実行委員会による非営利の交流イベント告知は「非営利使用」に該当し、許諾申請は不要と判断（該当利用例「サークルや自治会で配布する会報や資料」に相当）。ただし以下のルールを厳守すること:
